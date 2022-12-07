@@ -13,9 +13,19 @@ def test_search_browserstack():
         browser.all((AppiumBy.CLASS_NAME, "android.widget.TextView")).should(have.size_greater_than(0))
 
 
-def test_logo():
-    with allure.step('Проверяем наличие логотипа WikipediA'):
-        browser.element((AppiumBy.ID, "org.wikipedia.alpha:id/single_fragment_toolbar_wordmark")).should(be.existing)
+def test_open_settings():
+    with allure.step('Открываем меню действий'):
+        browser.element((AppiumBy.ID, "org.wikipedia.alpha:id/menu_overflow_button")).click()
+    with allure.step('Выбираем в меню пункт Settings'):
+        browser.element((AppiumBy.ID, "org.wikipedia.alpha:id/explore_overflow_settings")).click()
+
+    with allure.step('Проверяем, что открылась страница Settings'):
+        browser.all((AppiumBy.CLASS_NAME, "android.widget.TextView")).\
+            element_by(have.text('Settings')).should(be.visible)
+
+
+
+
 
 
 
